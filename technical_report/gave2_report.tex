@@ -332,6 +332,47 @@ augmentation), HuggingFace \texttt{transformers} and \texttt{huggingface\_hub}
 \texttt{scikit-image}, \texttt{networkx}, and \texttt{sknw} (skeletonization
 and fractal-dimension computation for Task 3), OpenCV.
 
+\subsection{Results}\label{sec:results}
+Table~\ref{tab:progression} shows the real preliminary-leaderboard round
+score at each validated pipeline change, in the order they were made. Each
+row reflects a single, isolated change tested against the standing best at
+the time (never assumed from local validation alone) -- the two largest
+jumps are the move from a single fold to a real 5-fold ensemble (Sect.~1.3),
+and the correction of the baseline's Task 3 sourcing convention
+(Sect.~\ref{sec:postprocessing}).
+
+\begin{table}[t]
+\centering
+\caption{Round-score progression through validated pipeline changes
+(preliminary leaderboard). Task1/Task2/Task3 are the official per-task
+scores; Round is the combined score used for ranking.}
+\label{tab:progression}
+\begin{tabular}{lccccc}
+\toprule
+Change & Task1 & Task2 & Task3 & Round & $\Delta$Round \\
+\midrule
+Single fold + soft-clDice loss & 7.093 & 6.982 & 6.076 & 6.664 & -- \\
+Real 5-fold ensemble + TTA & 7.261 & 7.410 & 6.310 & 6.940 & $+0.276$ \\
+Task 3 sourced from Task 1 (not Task 2) & 7.256 & 7.387 & 6.613 & 7.051 & $+0.111$ \\
+Task 3 threshold tuned (127$\to$140) & 7.285 & 7.349 & 6.666 & 7.063 & $+0.012$ \\
+Weighted 12th ensemble member (final) & 7.291 & 7.358 & 6.666 & \textbf{7.068} & $+0.005$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Several other changes were tested with the same methodology and did
+\emph{not} improve on the standing best, and were therefore not kept: a
+larger (11-fold) ensemble as the Task 3 source, a higher or per-channel
+binarization threshold, a smaller (1--2 fold) Task 3 source, adding new
+ensemble members at full/equal weight rather than reduced weight, a
+cross-attention fusion variant of Task 2 (\texttt{cmrrwnet\_xattn.py}), and
+confidence-filtered self-training/pseudo-labeling for Task 1 -- the last of
+these was confirmed, via the same leakage-free evaluation, to actively
+\emph{regress} topology metrics (COR/INF) despite slightly improving raw
+DSC, consistent with confirmation bias reinforcing the model's own weak
+spots. The full log of every attempted change, with results and reasoning,
+is in \texttt{submissions\_log.csv} in the code repository.
+
 %
 \section{DockerHub and GitHub}
 Code: \url{https://github.com/aaronjji/miccai-gave2-challenge}. The repository
