@@ -26,8 +26,15 @@ def main():
     p.add_argument("--images-dir", type=str, required=True, help="Original CFP images (for heuristic OD detection)")
     p.add_argument("--masks-dir", type=str, required=True, help="ROI masks (for heuristic OD detection)")
     p.add_argument("--out-dir", type=str, required=True)
-    p.add_argument("--threshold", type=int, default=127)
+    p.add_argument("--threshold", type=int, default=127, help="Fallback threshold for any channel not given its own override")
+    p.add_argument("--threshold-r", type=int, default=None, help="Artery (R) channel threshold override")
+    p.add_argument("--threshold-g", type=int, default=None, help="Vessel (G) channel threshold override -- feeds BOTH artery_mask and vein_mask (g & ~b / g & ~r)")
+    p.add_argument("--threshold-b", type=int, default=None, help="Vein (B) channel threshold override")
     args = p.parse_args()
+
+    thr_r = args.threshold_r if args.threshold_r is not None else args.threshold
+    thr_g = args.threshold_g if args.threshold_g is not None else args.threshold
+    thr_b = args.threshold_b if args.threshold_b is not None else args.threshold
 
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -44,7 +51,10 @@ def main():
         name = av_path.stem
         try:
             av_prob = np.array(Image.open(av_path).convert("RGB"))
-            av_bin = (av_prob > args.threshold).astype(np.uint8) * 255
+            av_bin = np.zeros_like(av_prob, dtype=np.uint8)
+            av_bin[..., 0] = (av_prob[..., 0] > thr_r).astype(np.uint8) * 255
+            av_bin[..., 1] = (av_prob[..., 1] > thr_g).astype(np.uint8) * 255
+            av_bin[..., 2] = (av_prob[..., 2] > thr_b).astype(np.uint8) * 255
 
             image = np.array(Image.open(images_dir / f"{name}.png").convert("RGB"))
             roi = np.array(Image.open(masks_dir / f"{name}.png").convert("L"))

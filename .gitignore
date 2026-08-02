@@ -35,4 +35,13 @@ submissions/
 kaggle_pull/
 kaggle_pull2/
 kaggle_fold2_pull/
+kaggle_fold4_pull/
+kaggle_seed101_pull/
+kaggle_output_11fold/
+kaggle_output_v5_check/
 kaggle/kernel_meta/
+
+# Local checkpoint-upload staging / intermediate build outputs (large binaries)
+kaggle_upload/
+local_build/
+GAVE2_source_code_best_submission.zip
