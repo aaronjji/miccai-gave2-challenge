@@ -12,6 +12,12 @@
 %
 \begin{document}
 %
+% Prioritize never overflowing the margin over perfectly even interword
+% spacing -- several dense \texttt clusters (parameter names, model IDs)
+% were causing slight overfull-hbox bleeds that targeted \allowbreak
+% fixes weren't reliably catching.
+\sloppy
+%
 \title{GAVE2 Challenge Technical Report: aaronteam}
 %
 \titlerunning{GAVE2 Technical Report: aaronteam}
@@ -144,7 +150,7 @@ weights applied repeatedly, not 5 independent decoder stages).
 
 \textbf{Task 1 (RRWNet, 3-channel input).} A single encoder path
 (\texttt{conv1--conv5}) at base channel width 64, U-Net decoder
-(\texttt{upconv1--upconv4},\allowbreak\ \texttt{conv6--conv9}), producing a 3-channel
+(\texttt{upconv1--upconv4}, \texttt{conv6--conv9}), producing a 3-channel
 logit map (artery, vessel-union, vein). Warm-started from HRF-pretrained
 weights (\texttt{j-morano/rrwnet-hrf}, HuggingFace) before fine-tuning on
 GAVE2 data.
