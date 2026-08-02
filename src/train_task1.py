@@ -76,6 +76,7 @@ def parse_args():
              "Previously val_loader was created but never used -- training was blind to overfitting.",
     )
     p.add_argument("--resume", action="store_true", help="Resume from out_dir/fold{N}/latest.pth if present")
+    p.add_argument("--init-checkpoint", type=str, default=None, help="Load model weights (only) from this checkpoint before training starts -- fresh optimizer/epoch count, for short fine-tunes off an existing model")
     p.add_argument("--seed", type=int, default=77)
     p.add_argument("--device", type=str, default=None, help="Override device (e.g. 'cpu') -- for smoke-testing without touching a GPU that's busy elsewhere")
     p.add_argument(
@@ -158,6 +159,11 @@ def main():
 
     device = torch.device(args.device) if args.device else torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = build_model("task1", base_ch=args.base_ch, iterations=args.iterations, pretrained=args.pretrained).to(device)
+    if args.init_checkpoint:
+        ckpt = torch.load(args.init_checkpoint, map_location=device)
+        sd = ckpt["model"] if isinstance(ckpt, dict) and "model" in ckpt else ckpt
+        model.load_state_dict(sd)
+        print(f"Initialized weights from {args.init_checkpoint}")
 
     base_criterion = BCE3Loss(
         pos_weight=args.pos_weight if args.pos_weight > 0 else None,
