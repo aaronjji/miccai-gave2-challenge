@@ -1,6 +1,6 @@
 # Running Task 1 training on Kaggle
 
-Code lives at `github.com/aaronjji/rk8391-devbox` (public, deliberately named to be non-descriptive). Since Kaggle
+Code lives at `github.com/aaronjji/miccai-gave2-challenge` (public). Since Kaggle
 notebooks are the only interface (no SSH), this has to be run manually --
 these are the setup steps, then `train_notebook.py` has the actual cells.
 
