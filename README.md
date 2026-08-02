@@ -4,7 +4,7 @@ Solution for the **GAVE2** challenge (Generalized Analysis of Vessels in Eye,
 Edition 2), part of the OMIA workshop at **MICCAI 2026**
 ([challenge page](https://aistudio.baidu.com/competition/detail/1463/0/introduction)).
 Team **aaronteam** (Aaron Ajit) — preliminary round round score **7.06756**,
-top 30 finish, advancing to the finals verification stage.
+top 30 finish (27th out of 247 teams), advancing to the finals verification stage.
 
 Three tasks on color fundus photos (CFP): (1) artery/vein segmentation from CFP alone,
 (2) cross-modal AV segmentation with paired early/late-phase FFA, (3) vascular
