@@ -1,10 +1,24 @@
-# Retinal AV Segmentation & Vascular Biomarker Pipeline
+# GAVE2 (MICCAI 2026 OMIA Workshop Challenge) — Team aaronteam
+
+Solution for the **GAVE2** challenge (Generalized Analysis of Vessels in Eye,
+Edition 2), part of the OMIA workshop at **MICCAI 2026**
+([challenge page](https://aistudio.baidu.com/competition/detail/1463/0/introduction)).
+Team **aaronteam** (Aaron Ajit) — preliminary round round score **7.06756**,
+top 30 finish, advancing to the finals verification stage.
 
 Three tasks on color fundus photos (CFP): (1) artery/vein segmentation from CFP alone,
-(2) cross-modal AV segmentation with paired FFA, (3) vascular biomarker quantification.
+(2) cross-modal AV segmentation with paired early/late-phase FFA, (3) vascular
+biomarker quantification (AVR, vessel density, fractal dimension) from the
+predicted segmentation.
 
-Full strategy, timeline, and open questions: see the plan doc referenced in this
-project's Claude Code session, or `reports/technical_report_draft.md` once started.
+Built on the official GAVE2 baseline, [CMRRWNet](external/cmrrwnet), and its
+[RRWNet](external/rrwnet) backbone (Morano et al., *Expert Systems with
+Applications* 2024), with a topology-aware soft-clDice loss, a multi-seed
+cross-validation ensemble, and a corrected/tuned Task 3 biomarker-sourcing
+pipeline. Full technical report: [`technical_report/gave2_report.tex`](technical_report/gave2_report.tex).
+Exact commands + checkpoints to reproduce the final submission:
+[`STANDING_BEST_RECIPE.md`](STANDING_BEST_RECIPE.md). Full experiment history
+(what was tried, what worked, what didn't, and why): [`submissions_log.csv`](submissions_log.csv).
 
 ## Layout
 
