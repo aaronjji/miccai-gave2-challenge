@@ -144,7 +144,7 @@ weights applied repeatedly, not 5 independent decoder stages).
 
 \textbf{Task 1 (RRWNet, 3-channel input).} A single encoder path
 (\texttt{conv1--conv5}) at base channel width 64, U-Net decoder
-(\texttt{upconv1--upconv4}, \texttt{conv6--conv9}), producing a 3-channel
+(\texttt{upconv1--upconv4},\allowbreak\ \texttt{conv6--conv9}), producing a 3-channel
 logit map (artery, vessel-union, vein). Warm-started from HRF-pretrained
 weights (\texttt{j-morano/rrwnet-hrf}, HuggingFace) before fine-tuning on
 GAVE2 data.
@@ -308,8 +308,8 @@ available VRAM), 60 training epochs per fold (70 for the first Task 1 fold),
 50 gradient steps per epoch. Mixed-precision training in \texttt{bfloat16}
 (not \texttt{fp16} -- \texttt{fp16} autocast produced NaNs on our primary
 GPU's Turing architecture; \texttt{bfloat16}'s wider exponent range avoided
-this). $\texttt{pos\_weight}=5.0$, $\texttt{vein\_pos\_weight}=6.0$,
-$\texttt{cldice\_weight}=0.3$, $\texttt{vein\_topology\_ratio}=1.3$ (see
+this). $\texttt{pos\_weight}=5.0$,\allowbreak\ $\texttt{vein\_pos\_weight}=6.0$,\allowbreak\
+$\texttt{cldice\_weight}=0.3$,\allowbreak\ $\texttt{vein\_topology\_ratio}=1.3$ (see
 Sect.~1.2 for the loss definition). Checkpoints saved every 5 epochs;
 validation (on the fold's held-out split) every 5 epochs.
 
