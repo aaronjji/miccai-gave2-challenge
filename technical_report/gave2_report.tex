@@ -6,7 +6,8 @@
 \usepackage{booktabs}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,fit,backgrounds}
-\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue,breaklinks=true]{hyperref}
 \renewcommand\UrlFont{\color{blue}\rmfamily}
 %
 \begin{document}
@@ -194,7 +195,7 @@ ratio, (iii) artery/vein vessel density within Zone-C, and (iv) artery/vein
 fractal dimension via box-counting on the whole-image vessel skeleton. The
 optic disc mask comes from a SegFormer model \cite{xie2021segformer}
 pretrained on REFUGE for disc/cup segmentation
-(\texttt{pamixsun/segformer\_for\_optic\_disc\_cup\_segmentation}, used
+(\texttt{pamixsun/\allowbreak segformer\_\allowbreak for\_\allowbreak optic\_\allowbreak disc\_\allowbreak cup\_\allowbreak segmentation}, used
 frozen, no fine-tuning), replacing the challenge baseline's MNet\_DeepCDR
 detector.
 
