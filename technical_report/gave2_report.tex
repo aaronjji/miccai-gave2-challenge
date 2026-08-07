@@ -354,10 +354,11 @@ i7-1265U CPU, 32\,GB system RAM. Secondary (used for some early-stage fold
 training only): Kaggle's free-tier NVIDIA Tesla T4 (16\,GB VRAM) cloud
 notebooks.
 
-\textbf{Model size and wall-clock cost.} Task 1 (RRWNet) has 124.13M
-parameters (237\,MB checkpoint); Task 2 (CMRRWNet) has 163.30M parameters
-(315\,MB checkpoint), the extra $\sim$39M coming from the two additional FFA
-encoder branches. Training throughput on the primary T550 GPU is
+\textbf{Model size and wall-clock cost.} Task 1 (RRWNet) has 62.06M unique
+parameters (237\,MB fp32 checkpoint); Task 2 (CMRRWNet) has 82.39M unique
+parameters (315\,MB fp32 checkpoint), the extra $\sim$20M coming from the
+two additional FFA encoder branches. Training throughput on the primary
+T550 GPU is
 $\sim$8--10\,s/gradient step (measured directly from \texttt{train\_log.csv}
 across multiple folds of both tasks), i.e.\ $\sim$7--8\,min/epoch at 50
 steps/epoch, so a single 60-epoch fold takes roughly 7--8\,h ($\sim$8.75\,h
