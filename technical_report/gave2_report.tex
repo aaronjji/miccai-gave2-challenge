@@ -86,7 +86,7 @@ detector.
   % Task 1 column (left)
   \node[io] (cfp1) {CFP image (3ch)\\$1536\times1024$};
   \node[box, below=0.5cm of cfp1, fill=blue!10] (rrwnet) {RRWNet\\encoder--decoder};
-  \node[box, below=0.5cm of rrwnet, fill=blue!20] (refine1) {Recursive\\refinement $\times5$};
+  \node[box, below=0.5cm of rrwnet, fill=blue!20] (refine1) {Recursive\\refinement $\times(5{+}1)$};
   \node[io, below=0.5cm of refine1] (out1) {A/V/vessel\\probability map};
 
   \draw[arr] (cfp1) -- (rrwnet);
@@ -96,7 +96,7 @@ detector.
   % Task 2 column (right)
   \node[io, right=2.4cm of cfp1] (cfp2) {CFP (3ch) + registered\\FFA-A/FFA-AV (2ch)};
   \node[box, below=0.5cm of cfp2, fill=orange!10] (cmrrwnet) {CMRRWNet: 3-branch\\encoder + SE fusion};
-  \node[box, below=0.5cm of cmrrwnet, fill=orange!20] (refine2) {Recursive\\refinement $\times5$};
+  \node[box, below=0.5cm of cmrrwnet, fill=orange!20] (refine2) {Recursive\\refinement $\times(5{+}1)$};
   \node[io, below=0.5cm of refine2] (out2) {A/V/vessel\\probability map};
 
   \draw[arr] (cfp2) -- (cmrrwnet);
