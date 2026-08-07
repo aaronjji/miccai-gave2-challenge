@@ -8,7 +8,7 @@ Per the Aug 1 reminder email: all top-30 teams must designate a primary
 email contact. Send to `pengqiyu2004@163.com`:
 
 > Team name: aaronteam
-> Primary contact email: aaronajit@gmail.com
+> Primary contact email: aaronaajit@gmail.com
 
 This is distinct from the confirmation reply and the material submission —
 send it as its own email, promptly.
