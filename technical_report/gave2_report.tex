@@ -37,8 +37,9 @@ Analysis of Vessels in Eye, Edition 2) challenge preliminary round. Our
 pipeline builds on the official CMRRWNet baseline and its RRWNet backbone
 \cite{morano2024rrwnet}, adding a topology-aware soft-clDice loss
 \cite{shit2021cldice}, an asymmetric artery/vein loss weighting scheme, a
-multi-seed cross-validation ensemble (11 members across three independent
-random partitions), horizontal-flip test-time augmentation, and a
+multi-seed cross-validation ensemble (11--12 members across three
+independent random partitions, one member down-weighted), horizontal-flip
+test-time augmentation, and a
 SegFormer-based optic disc detector \cite{xie2021segformer} for Task 3
 biomarker extraction. We additionally found and corrected an unvalidated
 assumption in the baseline pipeline (Task 3 should be sourced from Task 1's
@@ -278,6 +279,11 @@ memory footprint caused severe slowdown near the 4GB VRAM ceiling of our
 primary GPU at 384px; dropping to 320px avoided this).
 
 \subsection{Postprocessing}\label{sec:postprocessing}
+\textbf{Field-of-view masking.} All predicted probability maps (Task 1 and
+Task 2) are masked to the provided field-of-view ROI before saving --
+pixels outside the ROI are zeroed -- so no vessel is ever predicted outside
+the valid imaging area.
+
 \textbf{Ensembling.} Task 1 and Task 2 submissions each average sigmoid
 probabilities (quantized to 32 levels before saving) across 11 checkpoints:
 5 folds $\times$ seed 77, 5 folds $\times$ seed 101, and 1 fold from seed
@@ -382,7 +388,10 @@ our final submission (\texttt{STANDING\_BEST\_RECIPE.md}), a complete log of
 every experiment attempted with real leaderboard results and reasoning
 (\texttt{submissions\_log.csv}), and an \texttt{environment.yml} /
 \texttt{requirements.txt} for environment reproduction. No Docker image is
-provided at this time.
+provided at this time. All 12 checkpoints used in the final submission are
+additionally archived as Kaggle Datasets (\texttt{gave2-task1-7fold-ckpts}
+and \texttt{gave2-task2-7fold-ckpts} under the \texttt{aaronajit} account),
+independent of the local training hardware.
 
 %
 \begin{thebibliography}{8}
