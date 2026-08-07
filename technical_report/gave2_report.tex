@@ -354,6 +354,25 @@ i7-1265U CPU, 32\,GB system RAM. Secondary (used for some early-stage fold
 training only): Kaggle's free-tier NVIDIA Tesla T4 (16\,GB VRAM) cloud
 notebooks.
 
+\textbf{Model size and wall-clock cost.} Task 1 (RRWNet) has 124.13M
+parameters (237\,MB checkpoint); Task 2 (CMRRWNet) has 163.30M parameters
+(315\,MB checkpoint), the extra $\sim$39M coming from the two additional FFA
+encoder branches. Training throughput on the primary T550 GPU is
+$\sim$8--10\,s/gradient step (measured directly from \texttt{train\_log.csv}
+across multiple folds of both tasks), i.e.\ $\sim$7--8\,min/epoch at 50
+steps/epoch, so a single 60-epoch fold takes roughly 7--8\,h ($\sim$8.75\,h
+for the first, 70-epoch Task 1 fold). Full-resolution tiled sliding-window
+inference on this GPU (single checkpoint, single image, no TTA) measured
+61.6\,s for Task 1 and 60.9\,s for Task 2 -- essentially the same despite
+Task 2's larger model, since its smaller 320\,px tiling roughly offsets the
+extra two-encoder-branch cost. With the flip-TTA pass included (measured
+directly for Task 1 at 63.4\,s for the mirrored pass, assumed comparable
+for Task 2 given the matching no-TTA numbers), one checkpoint takes
+$\sim$125\,s/image for either task. Since ensemble inference is sequential
+per checkpoint, this scales close to linearly: the full 11-member Task 1
+ensemble with TTA is $\sim$23\,min/image, and the 12-member Task 2 ensemble
+is $\sim$25\,min/image.
+
 \subsection{Technical Stack}
 Python 3.10, PyTorch (CUDA 12.1). Key libraries: Albumentations (data
 augmentation), HuggingFace \texttt{transformers} and \texttt{huggingface\_hub}
