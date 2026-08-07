@@ -36,9 +36,11 @@ runs/task1/fold{0..4}/final.pth   # seed=77 only
 
 ## Durable checkpoint backup
 
-All 12 checkpoints used in this recipe (the 11-fold Task1 base, 11-fold
-Task2 base, and the extra `task2_seed202/fold3` member) are archived as
-Kaggle Datasets, not just on the local training machine:
+12 checkpoint files each (24 total) are archived as **public** Kaggle
+Datasets, not just on the local training machine — confirmed public
+2026-08-07 (`isPrivate` cleared via `kaggle datasets metadata --update`,
+both were private by default until then, since they were originally
+uploaded only for this account's own Kaggle-kernel use, not for review):
 
 - Task1: `aaronajit/gave2-task1-7fold-ckpts` (`fold0..fold11_final.pth`)
 - Task2: `aaronajit/gave2-task2-7fold-ckpts` (`fold0..fold11_final.pth`)
@@ -47,7 +49,10 @@ Kaggle Datasets, not just on the local training machine:
 seed202 fold0); `fold11` is the seed202/fold3 checkpoint used at 0.3 weight.
 Task1's `fold11` is included for completeness (it was the warm-start basis
 for Task2's `fold11`) even though it isn't itself used in the submitted
-Task1 ensemble.
+Task1 ensemble — so the *submitted* recipe uses 11 Task1 checkpoints + 12
+Task2 checkpoints, not 12 of each. The `-7fold-` in both dataset names is a
+stale label from an earlier, smaller ensemble size; left unchanged to avoid
+breaking the existing dataset URLs (referenced from the report and here).
 
 ## Commands
 

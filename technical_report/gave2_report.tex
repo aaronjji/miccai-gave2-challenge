@@ -388,10 +388,14 @@ our final submission (\texttt{STANDING\_BEST\_RECIPE.md}), a complete log of
 every experiment attempted with real leaderboard results and reasoning
 (\texttt{submissions\_log.csv}), and an \texttt{environment.yml} /
 \texttt{requirements.txt} for environment reproduction. No Docker image is
-provided at this time. All 12 checkpoints used in the final submission are
-additionally archived as Kaggle Datasets (\texttt{gave2-task1-7fold-ckpts}
-and \texttt{gave2-task2-7fold-ckpts} under the \texttt{aaronajit} account),
-independent of the local training hardware.
+provided at this time. Every checkpoint used in the final submission -- the
+11 in the Task 1 ensemble and the 12 in the Task 2 ensemble (Sect.~2.5) --
+is additionally archived, publicly, as two Kaggle Datasets:
+\texttt{gave2-task1-7fold-ckpts} and \texttt{gave2-task2-7fold-ckpts} under
+the \texttt{aaronajit} account, independent of the local training hardware.
+(The \texttt{7fold} in both names is a legacy label from an earlier,
+smaller ensemble size and no longer reflects the actual member count --
+kept unchanged to avoid breaking the existing dataset URLs.)
 
 %
 \begin{thebibliography}{8}
