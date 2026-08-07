@@ -34,6 +34,21 @@ Task3 source (5-fold only, NOT the 11-fold ensemble):
 runs/task1/fold{0..4}/final.pth   # seed=77 only
 ```
 
+## Durable checkpoint backup
+
+All 12 checkpoints used in this recipe (the 11-fold Task1 base, 11-fold
+Task2 base, and the extra `task2_seed202/fold3` member) are archived as
+Kaggle Datasets, not just on the local training machine:
+
+- Task1: `aaronajit/gave2-task1-7fold-ckpts` (`fold0..fold11_final.pth`)
+- Task2: `aaronajit/gave2-task2-7fold-ckpts` (`fold0..fold11_final.pth`)
+
+`fold0..fold10` are the 11-fold base (seed77 folds0-4, seed101 folds0-4,
+seed202 fold0); `fold11` is the seed202/fold3 checkpoint used at 0.3 weight.
+Task1's `fold11` is included for completeness (it was the warm-start basis
+for Task2's `fold11`) even though it isn't itself used in the submitted
+Task1 ensemble.
+
 ## Commands
 
 ### 1. Train each fold
