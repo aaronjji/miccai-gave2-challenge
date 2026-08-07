@@ -172,17 +172,19 @@ initialization.
 \label{eq:total_loss}
 \end{equation}
 where $\mathcal{L}_{\text{RR}}$ is a weighted sum of per-channel BCE losses
-across the model's $M{+}2$ predictions ($M{=}5$ recursive-refinement
-iterations, plus the initial and pre-refinement predictions): the first
-prediction is weighted separately, and the remaining $k{=}M{+}1$
-predictions are weighted $1,2,\dots,k$ (later, more-refined predictions
-weighted more heavily), normalized so the weights sum to 1:
+across the model's $M{+}2$ predictions: one initial (non-refined) prediction
+from the base U-Net, plus $M{+}1$ recursive-refinement predictions ($M{=}5$
+explicit refinement iterations, plus one further application of the same
+refinement module prior to that loop). The initial prediction is weighted
+separately, and the remaining $k{=}M{+}1$ refinement predictions are
+weighted $1,2,\dots,k$ (later, more-refined predictions weighted more
+heavily), normalized so the weights sum to 1:
 \begin{equation}
 \mathcal{L}_{\text{RR}} = \mathcal{L}_1 + \frac{1}{Z}\sum_{j=1}^{k} j \cdot \mathcal{L}_{j+1},
 \qquad k = M{+}1, \quad Z = \tfrac{1}{2}k(k{+}1),
 \label{eq:rrloss}
 \end{equation}
-$\mathcal{L}_j$ being the per-iteration BCE3 loss (independent weighted BCE
+$\mathcal{L}_i$ being the per-prediction BCE3 loss (independent weighted BCE
 on artery, vessel-union, and vein channels, with the vein channel given its
 own, higher positive-class weight than artery -- $\texttt{pos\_weight}=5.0$,
 $\texttt{vein\_pos\_weight}=6.0$ -- since vessels are a small minority class
