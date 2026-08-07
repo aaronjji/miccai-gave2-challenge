@@ -5,6 +5,12 @@ Edition 2), part of the OMIA workshop at **MICCAI 2026**
 ([challenge page](https://aistudio.baidu.com/competition/detail/1463/0/introduction)).
 Team **aaronteam** (Aaron Ajit) — preliminary round round score **7.06756**,
 top 30 finish (27th out of 247 teams), advancing to the finals verification stage.
+Per the "same model in finals" rule, the exact code state used to produce that
+result is pinned at commit
+[`444a477`](https://github.com/aaronjji/miccai-gave2-challenge/commit/444a477)
+("Final GAVE2 preliminary recipe: standing-best submission (round=7.06756)");
+later commits on this branch are documentation/report changes only, not model
+or pipeline changes.
 
 Three tasks on color fundus photos (CFP): (1) artery/vein segmentation from CFP alone,
 (2) cross-modal AV segmentation with paired early/late-phase FFA, (3) vascular
