@@ -252,8 +252,11 @@ weights for the SegFormer optic disc detector (Sect.~1.2); no other
 external training data was used.
 
 \subsection{Datasets Split Method}
-5-fold cross-validation, plain random splitting (no camera-vendor
-stratification, since no vendor metadata ships with the dataset). To build a
+5-fold cross-validation, plain random splitting at the case level (each of
+the 50 training cases -- CFP plus its paired FFA images and labels --
+assigned wholly to one fold, so no case appears in both a fold's training
+and validation split). No camera-vendor stratification, since no vendor
+metadata ships with the dataset. To build a
 larger, more diverse ensemble than a single 5-fold partition allows, we
 generated three independent 5-fold partitions using different random seeds
 (77, 101, 202) and trained a model on each fold of each partition, using
@@ -297,8 +300,10 @@ the valid imaging area.
 \textbf{Ensembling.} Task 1 and Task 2 submissions each average sigmoid
 probabilities (quantized to 32 levels before saving) across a base of 11
 checkpoints: 5 folds $\times$ seed 77, 5 folds $\times$ seed 101, and 1 fold
-from seed 202, plus horizontal-flip TTA within each checkpoint. We found
-empirically
+from seed 202, plus horizontal-flip TTA within each checkpoint. The final
+Task 1 ensemble uses exactly these 11 checkpoints; the final Task 2
+ensemble uses these same 11 plus one additional checkpoint (12 total,
+described below). We found empirically
 that adding further members at equal weight did not reliably help -- two
 additional seed-202 folds each \emph{regressed} the ensemble at equal
 weight, but the same checkpoint blended in at reduced weight (pixel-wise
@@ -383,6 +388,15 @@ Weighted 12th ensemble member (final) & 7.291 & 7.358 & 6.666 & \textbf{7.068} &
 \bottomrule
 \end{tabular}
 \end{table}
+
+Note on Task1/Task2 wobble across rows not targeting that task (e.g.\
+$7.261\!\to\!7.256$ between rows 2--3, $7.285\!\to\!7.291$ between rows
+4--5): these prediction files are byte-identical between the two
+submissions in each pair (sha256-verified) -- the pixel-level metrics
+(Sen/Spec/Acc/DSC) match exactly, but the composite Task1/Task2 scores still
+shift by up to $\pm0.03$. This is organizer-side sampling noise in the
+COR/INF topology metrics, not an effect of the row's labeled change; see
+\texttt{submissions\_log.csv} for the specific per-submission comparisons.
 
 Several other changes were tested with the same methodology and did
 \emph{not} improve on the standing best, and were therefore not kept: a
