@@ -2,6 +2,17 @@
 
 Deadline: **August 9, 23:59 Beijing time**, to `pengqiyu2004@163.com`, CC `omia@hdmilab.cn`.
 
+## 0. Primary contact designation (NEW, Aug 1 reminder — send ASAP, separate from everything else)
+
+Per the Aug 1 reminder email: all top-30 teams must designate a primary
+email contact. Send to `pengqiyu2004@163.com`:
+
+> Team name: aaronteam
+> Primary contact email: aaronajit@gmail.com
+
+This is distinct from the confirmation reply and the material submission —
+send it as its own email, promptly.
+
 ## 1. Confirmation reply (send this first, separately)
 
 Reply to the original email with exactly this (per their instruction — one
@@ -50,6 +61,24 @@ Contents:
       train a new/different model between now and the finals blind test
       (opens ~Sept 5) even if you're tempted to keep improving; that would
       risk disqualification.
+
+## Context worth knowing
+
+- **External pretrained weights are fine.** Read the full official rules
+  page (Aug 1) — no restriction anywhere on using pretrained weights/models.
+  The only related clause (Supplement 3) prohibits submitting the baseline's
+  *predictions* unchanged, not building on pretrained components, which is
+  what this pipeline does (HRF-pretrained RRWNet, REFUGE-pretrained
+  SegFormer) — already disclosed in the report regardless.
+- **Final scoring**: `Score_total = 0.3 × Score_preliminary + 0.7 × Score_final`.
+  The preliminary result (round=7.06756) is locked in as 30% of the overall
+  outcome no matter what happens in finals — not just a qualifying gate.
+- Rule (11): top teams may be invited to co-author a joint journal
+  paper (max 2 authors/team) summarizing methods/results across the
+  challenge. Not actionable now, just worth knowing if you place well.
+- Rule (12): official WeChat group exists for challenge communication
+  (format "Team ID - Name" after joining); non-Chinese-speaking
+  participants can stick to `omia@hdmilab.cn` instead.
 
 ## 4. Not yet done — flag if you want it
 
